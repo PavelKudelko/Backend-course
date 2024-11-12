@@ -1,8 +1,11 @@
 const express = require('express');
+const morgan = require('morgan');
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+
+app.use(morgan('dev'));
 
 // JSON array from assignment
 const movies = [
@@ -27,18 +30,50 @@ app.get('/', (req, res) => {
     res.send(movies)
 });
 
-// New implementation, returns simple html with movie list
-app.get('/movies', (req, res) => {
-    const movieList = movies.map(movie => 
-        `<li>${movie.title} (${movie.year}), 
-        directed by ${movie.director}</li>`).join('');
-
-    res.send(`<h1>Movie list</h1><ul>${movieList}</ul>`);
-  });
-
 app.listen(port, () => {
-    console.log(`app listening on port ${port}`)
+  console.log(`app listening on port ${port}`)
 });
+
+// New implementation, returns simple html with movie list
+// app.get('/movies', (req, res) => {
+//     const movieList = movies.map(movie => 
+//         `<li>${movie.title} (${movie.year}), 
+//         directed by ${movie.director}</li>`).join('');
+
+//     res.send(`<h1>Movie list</h1><ul>${movieList}</ul>`);
+// });
+
+// GET /movies with query parameters
+app.get('/movies', (req, res) => {
+  const { title, year, director } = req.query;
+
+  let filteredMovies = movies;
+
+  if (title) {
+    filteredMovies = filteredMovies.filter(movie =>
+      movie.title.toLowerCase().includes(title.toLowerCase())
+    );
+  }
+
+  if (year) {
+    filteredMovies = filteredMovies.filter(movie =>
+      movie.year === parseInt(year)
+    );
+  }
+
+  if (director) {
+    filteredMovies = filteredMovies.filter(movie =>
+      movie.director.toLowerCase().includes(director.toLowerCase())
+    );
+  }
+
+  const movieList = filteredMovies.map(movie =>
+    `<li>${movie.title} (${movie.year}), directed by ${movie.director}</li>`
+  ).join('');
+
+  res.send(`<h1>Movie list</h1><ul>${movieList}</ul>`);
+});
+
 
 // adding new movie
 app.post('/movies', (req, res) => {
@@ -107,4 +142,10 @@ app.put('/movies/:id', (req, res) => {
   if (year) movie.year = year;
 
   res.json(movie);
+});
+
+
+// Catch-all route for undefined routes
+app.use((req, res) => {
+  res.status(404).json({ status: 404, message: 'Route not found' });
 });

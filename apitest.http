@@ -1,22 +1,18 @@
 ### Get all movies (JSON format)
 GET http://localhost:3000/
-
 ### Get movies (HTML list format)
 GET http://localhost:3000/movies
-
 ### Get a specific movie by ID 
 GET http://localhost:3000/movies/1
-
 ### Create a new movie
 POST http://localhost:3000/movies
 Content-Type: application/json
 
 {
-  "title": "Interstellar",
-  "director": "Christopher Nolan",
-  "year": 2014
+  "title": "Shrek Forever After",
+  "director": "Mike Mitchell",
+  "year": 2010
 }
-
 ### Update an existing movie 
 PUT http://localhost:3000/movies/1
 Content-Type: application/json
@@ -29,3 +25,11 @@ Content-Type: application/json
 
 ### Delete a movie
 DELETE http://localhost:3000/movies/1
+### Try to get a non-existent movie (should return 404)
+GET http://localhost:3000/movies/999
+### Test the catch-all route (should return 404)
+GET http://localhost:3000/route-that-doesnt-exist
+### get movies with 2010 year
+GET http://localhost:3000/movies?year=2010
+### get moives with Noland && year == 2010
+GET http://localhost:3000/movies?year=2010&director=Christopher Nolan
