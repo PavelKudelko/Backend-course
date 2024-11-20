@@ -1,2 +1,1 @@
-# task2backend
- 
+# full-stack-web-dev course (back-end part)
