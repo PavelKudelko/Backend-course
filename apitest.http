@@ -1,9 +1,9 @@
 ### Get all movies (JSON format)
-GET http://localhost:3000/
+GET http://localhost:3000/movies/json
 ### Get movies (HTML list format)
 GET http://localhost:3000/movies
 ### Get a specific movie by ID 
-GET http://localhost:3000/movies/673f58db11dc45af7db0e987
+GET http://localhost:3000/movies/673f6b9103f8c3c6dc195309
 ### Create a new movie
 POST http://localhost:3000/movies
 Content-Type: application/json
@@ -24,7 +24,7 @@ Content-Type: application/json
 }
 
 ### Delete a movie
-DELETE http://localhost:3000/movies/673f60c6f1c32b2c1567d7b3
+DELETE http://localhost:3000/movies/673f64faa019d7b98306f716
 ### Try to get a non-existent movie (should return 404)
 GET http://localhost:3000/movies/999
 ### Test the catch-all route (should return 404)
