@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const movieRoutes = require('./routes/movies');
+const authRoutes = require('./routes/auth');
 const connectDB = require('./config/db.js');
 
 const app = express();
@@ -23,6 +24,7 @@ run_server();
 
 // Routes
 app.use('/movies', movieRoutes);
+app.use('/auth', authRoutes);
 
 // Catch-all route for undefined routes
 app.use((req, res) => {

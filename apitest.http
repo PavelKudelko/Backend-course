@@ -33,3 +33,23 @@ GET http://localhost:3000/route-that-doesnt-exist
 GET http://localhost:3000/movies?year=2010
 ### get moives with Noland && year == 2010
 GET http://localhost:3000/movies?year=2010&director=Mike Mitchell
+
+### Login Test - Valid Credentials
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin123"
+}
+
+### Create a new movie
+POST http://localhost:3000/movies
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGExMDJlM2IyZTQyYTVmZWY1NDAyZiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMjkwNzA2OCwiZXhwIjoxNzMyOTEwNjY4fQ.yi0DMYhhB0VpqrL611zYj7iIXv32UqiH1elyWB1n8Gk
+
+{
+  "title": "Shrek",
+  "director": "Andrew Adamson, Vicky Jenson",
+  "year": 2001
+}

@@ -11,13 +11,14 @@ const {
 } = require('../controllers/moviesController');
 
 const { validateMovie } = require('../middleware/validateMovie');
+const { authenticate } = require('../middleware/authenticate');
 
 // Routes
 router.get('/json', getAllMoviesJSON);
 router.get('/', getAllMovies);
 router.get('/:id', getMovieById);
-router.post('/', validateMovie, postMovie);
-router.put('/:id', validateMovie, updateMovieById);
-router.delete('/:id', deleteMovieById);
+router.post('/', authenticate, validateMovie, postMovie);
+router.put('/:id', authenticate, validateMovie, updateMovieById);
+router.delete('/:id', authenticate, deleteMovieById);
 
 module.exports = router;
