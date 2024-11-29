@@ -1,5 +1,4 @@
 const Movie = require('../models/movie');
-const { validateMovieData } = require('../utils/validate');
 
 const getAllMoviesJSON = async(req, res) => {
     try {
@@ -47,16 +46,8 @@ const postMovie = async(req, res) => {
     // add error catching
     try {
         const { title, director, year } = req.body;
-
-        const validationError = validateMovieData(title, director, year);
-
-        if (validationError) {
-            return res.status(400).json({ status: 400,
-                 message: validationError });
-        }
         // create movie object
         const newMovie = new Movie({ title, director, year });
-
         // save in db
         await newMovie.save();
         res.status(201).json(newMovie);
@@ -107,12 +98,6 @@ const updateMovieById = async (req, res) => {
     try {
     const movieId = req.params.id;
         const { title, director, year } = req.body;
-        // validate data
-        const validationError = validateMovieData(title, director, year);
-        if (validationError) {
-          return res.status(400).json({ status: 400,
-             message: validationError });
-        }
         // $set prevents overwriting other fields 
         // that are not included in the request
         const updatedMovie = await Movie.findByIdAndUpdate(

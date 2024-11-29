@@ -3,7 +3,7 @@ GET http://localhost:3000/movies/json
 ### Get movies (HTML list format)
 GET http://localhost:3000/movies
 ### Get a specific movie by ID 
-GET http://localhost:3000/movies/673f6b9103f8c3c6dc195309
+GET http://localhost:3000/movies/6748ec91ad7268f261cc9e8a
 ### Create a new movie
 POST http://localhost:3000/movies
 Content-Type: application/json
@@ -24,12 +24,12 @@ Content-Type: application/json
 }
 
 ### Delete a movie
-DELETE http://localhost:3000/movies/673f64faa019d7b98306f716
+DELETE http://localhost:3000/movies/6748ed4d4f0b9587d57d3de9
 ### Try to get a non-existent movie (should return 404)
-GET http://localhost:3000/movies/999
+GET http://localhost:3000/999
 ### Test the catch-all route (should return 404)
 GET http://localhost:3000/route-that-doesnt-exist
 ### get movies with 2010 year
 GET http://localhost:3000/movies?year=2010
 ### get moives with Noland && year == 2010
-GET http://localhost:3000/movies?year=2010&director=Christopher Nolan
+GET http://localhost:3000/movies?year=2010&director=Mike Mitchell

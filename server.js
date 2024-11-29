@@ -17,7 +17,6 @@ const run_server = async() => {
   app.listen(port, () => {
     console.log(`app listening on port ${port}`)
   });
-
 };
 
 run_server();
