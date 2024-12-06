@@ -1,11 +1,14 @@
 ### Get all movies (JSON format)
-GET http://localhost:3000/movies/json
+GET https://localhost:3443/movies/json
 ### Get movies (HTML list format)
-GET http://localhost:3000/movies
+GET https://localhost:3443/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTIwYWZmNTE2ZTAyNDE4N2VlZDc4OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMzQzMTAzMSwiZXhwIjoxNzMzNDM0NjMxfQ.PiZghArWqUPNddXyn4VO7v7AjHlLuD6PJAju3Uj_ip0
 ### Get a specific movie by ID 
-GET http://localhost:3000/movies/6748ec91ad7268f261cc9e8a
+GET http://localhost:3000/movies/673e13001eac26a4aedff263
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTIwYWZmNTE2ZTAyNDE4N2VlZDc4OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMzQzMTAzMSwiZXhwIjoxNzMzNDM0NjMxfQ.PiZghArWqUPNddXyn4VO7v7AjHlLuD6PJAju3Uj_ip0
 ### Create a new movie
 POST http://localhost:3000/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTE4NDQyZTQ3NjEwYWQ2YmNjN2I3ZCIsInJvbGUiOiJyZWd1bGFyIiwiaWF0IjoxNzMzNDMxMjc5LCJleHAiOjE3MzM0MzQ4Nzl9.zWnZpo9iBabG3C_cDjTQ329FAt1ckVL1smf2UT7mtls
 Content-Type: application/json
 
 {
@@ -25,6 +28,7 @@ Content-Type: application/json
 
 ### Delete a movie
 DELETE http://localhost:3000/movies/6748ed4d4f0b9587d57d3de9
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTE4NDQyZTQ3NjEwYWQ2YmNjN2I3ZCIsInJvbGUiOiJyZWd1bGFyIiwiaWF0IjoxNzMzNDI5ODIwLCJleHAiOjE3MzM0MzM0MjB9.xRObFibkLC780jwfmLsLgf2ukywzf-ViTzX4gUUhLR
 ### Try to get a non-existent movie (should return 404)
 GET http://localhost:3000/999
 ### Test the catch-all route (should return 404)
@@ -39,17 +43,34 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "username": "admin",
-    "password": "admin123"
+  "username": "testuser",
+  "password": "securepassword123"
+}
+### Login Test - not valid Credentials
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "userthatdoesntexist",
+  "password": "123"
 }
 
 ### Create a new movie
 POST http://localhost:3000/movies
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGExMDJlM2IyZTQyYTVmZWY1NDAyZiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMjkwNzA2OCwiZXhwIjoxNzMyOTEwNjY4fQ.yi0DMYhhB0VpqrL611zYj7iIXv32UqiH1elyWB1n8Gk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTE4NDQyZTQ3NjEwYWQ2YmNjN2I3ZCIsInJvbGUiOiJyZWd1bGFyIiwiaWF0IjoxNzMzNDMwMDg2LCJleHAiOjE3MzM0MzM2ODZ9.eHQ2UD7PchGpOiv1WFlphU6Y5VI2IIzaoXZnOyi0fb4
 
 {
   "title": "Shrek",
   "director": "Andrew Adamson, Vicky Jenson",
   "year": 2001
+}
+
+### Register a new user
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "newAdmin",
+  "password": "admin123"
 }

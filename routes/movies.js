@@ -15,10 +15,10 @@ const { authenticate } = require('../middleware/authenticate');
 
 // Routes
 router.get('/json', getAllMoviesJSON);
-router.get('/', getAllMovies);
-router.get('/:id', getMovieById);
-router.post('/', authenticate, validateMovie, postMovie);
-router.put('/:id', authenticate, validateMovie, updateMovieById);
-router.delete('/:id', authenticate, deleteMovieById);
+router.get('/', authenticate(['admin', 'regular']), getAllMovies);
+router.get('/:id', authenticate(['admin', 'regular']), getMovieById);
+router.post('/', authenticate(['admin']), validateMovie, postMovie);
+router.put('/:id', authenticate(['admin']), validateMovie, updateMovieById);
+router.delete('/:id', authenticate(['admin']), deleteMovieById);
 
 module.exports = router;
